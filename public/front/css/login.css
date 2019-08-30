@@ -1,0 +1,272 @@
+@font-face {
+   font-family: "Oswald Regular";
+   src: url('../fonts/oswald.regular.ttf');
+}
+
+@font-face {
+   font-family: "Oswald Light";
+   src: url('../fonts/oswald.light.ttf');
+}
+
+body {
+   margin: 0;
+   padding: 0;
+	background-color: #f4f4f4;
+   font-family: "Oswald Regular";
+   color: #616161;
+}
+
+.loginbox {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 350px;
+   box-sizing: border-box;
+   background: white;
+   box-shadow: 0 10px 10px rgba(0,0,0,.5);
+}
+
+.glass {
+   width: 100%;
+   height: 100%;
+   padding: 40px;
+   box-sizing: border-box;
+   background: rgba(255,255,255,1);
+   border-radius: 5px;
+}
+
+.glass img {
+   margin-left: -15px;
+   margin-bottom: 50px;
+   width: 300px;
+   height: 100px;
+}
+
+.loginbox .glass a{
+   display: inline-block;
+   text-decoration: none;
+   font-weight: lighter;
+}
+
+.user {
+   margin: 0 auto;
+   display: block;
+}
+
+h2 {
+   margin: 0;
+   padding: 0 0 20px;
+   margin-bottom: 10px;
+   text-align: center;
+   font-weight: 500;
+}
+
+.loginbox input{
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.loginbox .checkbox input{
+  width: auto;
+  margin-bottom: 10px;
+}
+
+.loginbox input[type=text],
+.loginbox input[type=email],
+.loginbox input[type=password] {
+   border: none;
+   font-family: "Oswald Regular";
+   border-bottom: 1px solid #262626;
+   outline: none;
+   height: 40px;
+   color: #616161;
+   background: white;
+   font-size: 16px;
+   padding-left: 25px;
+   box-sizing: border-box;
+}
+
+::placeholder {
+   color: rgba(0,0,0,.5);
+}
+
+.inputbox {
+   position: relative;
+}
+
+.inputbox span {
+   position: absolute;
+   top: 5px;
+   color: #616161;
+}
+
+.loginbox input[type=submit] {
+   border: none;
+   outline: none;
+   font-family: "Oswald Regular";
+   margin-top: 20px;
+   height: 40px;
+   font-size: 16px;
+   background: #E74C3C;
+   color: white;
+   border-radius: 20px;
+   cursor: pointer;
+}
+
+.loginbox p{
+   font-family: "Oswald Light";
+   text-align: right;
+   margin: -30px 0 5px 0;
+}
+
+p.p-forgot1{
+   text-align: center;
+   margin: -20px 0 50px 0;
+}
+
+p.p-forgot2{
+   font-size: 14px;
+   text-align: center;
+   margin: 10px 0 0 0;
+}
+
+.loginbox .checkbox p{
+  text-align: left;
+  margin-left: 25px;
+}
+
+.loginbox .glass p a{
+   display: inline-block;
+   font-weight: bold;
+   color: #616161;
+   text-decoration: none;
+}
+
+.loginbox a::after {
+   content: '';
+   display: block;
+   width: 0;
+   height: 2px;
+   background: #616161;
+   transition: width .3s;
+}
+
+.loginbox a:hover::after {
+   width: 100%;
+   transition: width .3s;
+}
+
+.btn1 {
+   width: 290px;
+   height: 35px;
+   background: #dd4b39;
+   position: absolute;
+   top: 30%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border-radius: 5px;
+   cursor: pointer;
+   overflow: hidden;
+   color: white;
+}
+
+.btn1:before {
+   content: "Login dengan Google+";
+   color: white;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   transition: all 0.5s;
+}
+
+.btn1:hover:before {
+   top: -30px;
+}
+
+.btn1:after {
+   font-family: "ionicons";
+   content: "\f235";
+   position: absolute;
+   top: calc(100% + 30px);
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 20px;
+   transition: all 0.5s;
+}
+
+.btn1:hover:after {
+   top: 50%;
+}
+
+.btn2 {
+   width: 290px;
+   height: 35px;
+   background: #3B5998;
+   position: absolute;
+   top: 38%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border-radius: 5px;
+   cursor: pointer;
+   overflow: hidden;
+   color: white;
+}
+
+.btn2:before {
+   content: "Login dengan Facebook";
+   color: white;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   transition: all 0.5s;
+}
+
+.btn2:hover:before {
+   top: -30px;
+}
+
+.btn2:after {
+   font-family: "ionicons";
+   content: "\f231";
+   position: absolute;
+   top: calc(100% + 30px);
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 20px;
+   transition: all 0.5s;
+}
+
+.btn2:hover:after {
+   top: 50%;
+}
+
+.hr-login {
+   font-family: "Oswald Light"
+   display: block;
+   overflow: hidden;
+   text-align: center;
+   white-space: nowrap;
+   margin-top: -40px;
+   margin-bottom: 10px;
+}
+
+.hr-login-text {
+   color: #999;
+   display: inline-block;
+   position: relative;
+}
+
+.hr-kiri {
+   float: left;
+   width: 40%;
+   margin-top: -5px;
+}
+
+.hr-kanan {
+   float: right;
+   width: 40%;
+   margin-top: -5px;
+}
