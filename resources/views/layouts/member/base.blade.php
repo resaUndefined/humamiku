@@ -63,18 +63,14 @@
                 <h3>Menu</h3>
                 <ul class="nav side-menu">
                   <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> Dashboard </a></li>
-                  {{-- <li><a href="#"><i class="fa fa-users"></i> Manajemen Profile </a></li> --}}
-                  <li><a href="{{ route('roles.index') }}"><i class="fa fa-edit"></i> Manajemen Role </a></li>
-                  <li><a href="{{ route('jabatan.index') }}"><i class="fa fa-gear"></i> Manajemen Jabatan </a></li>
-                  <li><a href="{{ route('users.index') }}"><i class="fa fa-user"></i> Manajemen User </a></li>
+                  <li><a href="{{ route('member.profile') }}"><i class="fa fa-users"></i> Manajemen Profile </a></li>
+                  <li><a href="#"><i class="fa fa-check-square-o"></i> Check Kehadiran </a></li>
+                  <li><a href="#"><i class="fa fa-check-square-o"></i> Check Notulen </a></li>
+                  <li><a href="#"><i class="fa fa-check-square-o"></i> Check Saldo KAS </a></li>
+                  <li><a href="#"><i class="fa fa-check-square-o"></i> Check Iuran KAS </a></li>
                   <li><a href="#"><i class="fa fa-table"></i> Manajemen Notulen </a></li>
                   <li><a href="#"><i class="fa fa-dollar"></i> Manajemen KAS </a></li>
-                  {{-- <li><a href="#"><i class="fa fa-check-square-o"></i> Check Kehadiran </a></li> --}}
-                  {{-- <li><a href="#"><i class="fa fa-check-square-o"></i> Check Notulen </a></li> --}}
-                  {{-- <li><a href="#"><i class="fa fa-check-square-o"></i> Check Saldo KAS </a></li> --}}
-                  {{-- <li><a href="#"><i class="fa fa-check-square-o"></i> Check Iuran KAS </a></li> --}}
                   <li><a href="#"><i class="fa fa-dollar"></i> Manajemen Cash Flow </a></li>
-                  <li><a href="#"><i class="fa fa-file"></i> Presensi </a></li>
                 </ul>
               </div>
 

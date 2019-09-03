@@ -67,7 +67,7 @@ class ResetPasswordController extends Controller
                                             ])->first();
         if(empty($email_token) || is_null($email_token)){
             return redirect()->back()
-                ->with('msg', 'Error, Reset password gagal.')
+                ->with('message', 'Error, Reset password gagal.')
                 ->withInput();
         }else{
             if ($request->isMethod('post')) {

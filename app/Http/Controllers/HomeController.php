@@ -26,6 +26,6 @@ class HomeController extends Controller
         if (auth()->user()->role->level == 1) {
             return redirect()->route('admin');
         }
-        return redirect()->route('user');
+        return redirect()->route('member');
     }
 }

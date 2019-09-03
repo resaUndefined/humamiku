@@ -18,6 +18,6 @@ class isAdminMiddleware
         if (auth()->user()->role->level == 1) {
             return $next($request);
         }
-        return redirect('home')->with('error','You have not admin access');
+        return redirect()->route('home')->with('error','You have not admin access');
     }
 }
