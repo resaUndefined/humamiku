@@ -16,6 +16,11 @@ select{
     width: 75px;
 }
 
+span.place {
+	font-weight: 700;
+	font-style: italic;
+}
+
 /*img.img-jumbotron {
 	width: 50%;
 	height: auto;

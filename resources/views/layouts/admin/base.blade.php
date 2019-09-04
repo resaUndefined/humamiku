@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="dashboard/img/favicon.ico" type="image/ico" />
+  <link rel="icon" href="{{ URL::asset('front/img/ring.jpg') }}" type="image/ico" />
 
     <title> @yield('title') </title>
 
@@ -115,6 +115,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="/"><i class="fa fa-home pull-right"></i> Home</a></li>
                     <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

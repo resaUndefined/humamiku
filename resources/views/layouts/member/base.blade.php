@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="dashboard/img/favicon.ico" type="image/ico" />
+  <link rel="icon" href="{{ URL::asset('front/img/ring.jpg') }}" type="image/ico" />
 
     <title> @yield('title') </title>
 
@@ -68,9 +68,13 @@
                   <li><a href="#"><i class="fa fa-check-square-o"></i> Check Notulen </a></li>
                   <li><a href="#"><i class="fa fa-check-square-o"></i> Check Saldo KAS </a></li>
                   <li><a href="#"><i class="fa fa-check-square-o"></i> Check Iuran KAS </a></li>
-                  <li><a href="#"><i class="fa fa-table"></i> Manajemen Notulen </a></li>
-                  <li><a href="#"><i class="fa fa-dollar"></i> Manajemen KAS </a></li>
-                  <li><a href="#"><i class="fa fa-dollar"></i> Manajemen Cash Flow </a></li>
+                  @if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris')
+                    <li><a href="{{ route('pertemuan.index') }}"><i class="fa fa-table"></i> Manajemen Pertemuan </a></li>
+                  @endif
+                  @if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara')
+                    <li><a href="{{ route('pertemuan.index') }}"><i class="fa fa-dollar"></i> Manajemen KAS </a></li>
+                    <li><a href="#"><i class="fa fa-dollar"></i> Manajemen Cash Flow </a></li>
+                  @endif
                 </ul>
               </div>
 
@@ -111,6 +115,7 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="/"><i class="fa fa-home pull-right"></i> Home</a></li>
                     <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
@@ -136,6 +141,12 @@
     </div>
 
     <!-- jQuery -->
+    <script src="https://cdn.tiny.cloud/1/q6853xnmt1tuy5hu2tbrmp01fhmjfvl2jqgdf7xuv9ptnoop/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({
+                          selector:'textarea',
+                          plugins: "advlist",
+                          advlist_bullet_styles: "square"
+                        });</script>
     <script src="{{ URL::asset('dashboard/vendors/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap -->
     <script src="{{ URL::asset('dashboard/vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
