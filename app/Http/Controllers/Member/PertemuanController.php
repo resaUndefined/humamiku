@@ -106,7 +106,18 @@ class PertemuanController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris') {
+            $pertemuan = Pertemuan::where('id', $id)->first();
+            if (!is_null($pertemuan)) {
+                $tes = explode("-", $pertemuan->tanggal);
+                $pertemuan->tanggal = $tes['1'].'-'.$tes['2'].'-'.$tes['0'];
+                return view('member.pertemuan.edit', [
+                    'pertemuan' => $pertemuan
+                ]);
+            }
+            return redirect()->route('pertemuan.index')->with('gagal','Maaf pertemuan tidak ditemukan');
+        }
+        return redirect()->route('home');
     }
 
     /**
@@ -118,7 +129,27 @@ class PertemuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $pertemuan = Pertemuan::where('id', $id)->first();
+        if (!is_null($pertemuan)) {
+            preg_match_all('!\d+!', $request->tanggal, $tgl);
+            $pertemuanCekIuran = Iuran::where('pertemuan_id',$pertemuan->id)->get();
+            $pertemuan->tempat = $request->tempat;
+            $pertemuan->tanggal = $tgl[0][2].'-'.$tgl[0][0].'-'.$tgl[0][1];;
+            $pertemuan->notulen = $request->notulen;
+            if (count($pertemuanCekIuran) > 0 && is_null($pertemuan->total_iuran)) {
+                $totalRemanen = null;
+                foreach ($pertemuanCekIuran as $key => $iuran) {
+                    $totalRemanen+=(int)$iuran->iuran;
+                }
+                $pertemuan->total_iuran = $totalRemanen;
+            }
+
+            $pertemuanSave = $pertemuan->save();
+            if ($pertemuanSave) {
+                return redirect()->route('pertemuan.index')->with('sukses', 'Pertemuan/Notulen berhasil diupdate');
+            }
+            return redirect('/member/pertemuan/$id/edit')->with('gagal', 'Pertemuan/Notulen gagal diupdate');   
+        }
     }
 
     /**

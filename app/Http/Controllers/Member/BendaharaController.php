@@ -68,7 +68,9 @@ class BendaharaController extends Controller
 	    		$iuranTmp = null;
 	    		$iuranTmp2 = null;
 	    		$iuranTmp = $request->get('iuran'.$member->id);
-	    		if ($iuranTmp == 1 || $iuranTmp == '1') {
+	    		if ($iuranTmp == 0 || $iuranTmp == '0') {
+		    		$iuranTmp2 = 0;
+	    		}elseif ($iuranTmp == 1 || $iuranTmp == '1') {
 		    		$iuranTmp2 = 5000;
 	    		}elseif ($iuranTmp == 2 || $iuranTmp == '2') {
 	    			$iuranTmp2 = 10000;
@@ -168,7 +170,9 @@ class BendaharaController extends Controller
 				$harusnya = null;
 				$kekurangan = null;
 				$iuranTmp = null;
-	    		if ($pi->iuran == 5000 || $pi->iuran == '5000') {
+	    		if ($pi->iuran == 0 || $pi->iuran == '0') {
+		    		$iuranTmp = 0;
+	    		}elseif ($pi->iuran == 5000 || $pi->iuran == '5000') {
 		    		$iuranTmp = 1;
 	    		}elseif ($pi->iuran == 10000 || $pi->iuran == '10000') {
 	    			$iuranTmp = 2;
@@ -229,7 +233,9 @@ class BendaharaController extends Controller
 	    		$iuranTmp = null;
 	    		$iuranTmp2 = null;
 	    		$iuranTmp = $request->get('iuran'.$ip->user_id);
-	    		if ($iuranTmp == 1 || $iuranTmp == '1') {
+	    		if ($iuranTmp == 0 || $iuranTmp == '0') {
+		    		$iuranTmp2 = 0;
+	    		}elseif ($iuranTmp == 1 || $iuranTmp == '1') {
 		    		$iuranTmp2 = 5000;
 	    		}elseif ($iuranTmp == 2 || $iuranTmp == '2') {
 	    			$iuranTmp2 = 10000;

@@ -43,7 +43,7 @@
                           <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ $member->name }} : </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <select class="form-control" required="" name="iuran{{ $member->id }}">
-                              <option value="">--Nominal--</option>
+                              <option value="0">--Nominal--</option>
                               <option value="1">Rp 5.000</option>
                               <option value="2">Rp 10.000</option>
                               <option value="3">Rp 15.000</option>

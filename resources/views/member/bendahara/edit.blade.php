@@ -45,7 +45,9 @@
                           <label class="control-label col-md-4 col-sm-4 col-xs-12">{{ $pi->nama_anggota }} : </label>
                           <div class="col-md-3 col-sm-3 col-xs-12">
                             <select class="form-control" required="" name="iuran{{ $pi->user_id }}">
-                              <option value="">--Nominal--</option>
+                              <option value="0" @if ($pi->iuran == 0)
+                                selected="" 
+                              @endif>--Nominal--</option>
                               <option value="1" @if ($pi->iuran == 1)
                                 selected="" 
                               @endif>Rp 5.000</option>
