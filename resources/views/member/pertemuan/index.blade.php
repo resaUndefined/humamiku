@@ -30,10 +30,10 @@
                         @if (count($pertemuans) > 0)
                           @if (is_null($pertemuanCek) && (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris'))
                             <a href="{{ route('pertemuan.create') }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Pertemuan Berikutnya</a>
-                          @else
+                          @elseif(!is_null($pertemuanCek))
                             @if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara')
-                              <a href="add_iuran.html" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Iuran</a>
-                            @else
+                              <a href="{{ route('iuran.create') }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Iuran</a>
+                            @elseif((Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris') && (is_null($pertemuanCek->notulen)))
                               <a href="{{ route('notulen.create') }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Notulen</a>
                             @endif
                           @endif
@@ -74,13 +74,21 @@
                               <th scope="row" class="col-md-1">{{ $pertemuans->firstItem() + $key }}</th>
                               <td>{{ $pertemuan->tempat }}</td>
                               <td>{{ $pertemuan->tanggal }}</td>
-                              <td>{{ $pertemuan->total_iuran }}</td>
+                              @if (is_null($pertemuan->total_iuran))
+                                <td> - </td>
+                              @else
+                                <td>@currency($pertemuan->total_iuran)</td>
+                              @endif
                               <td class="col-md-3">
                                 <a href="{{ route('pertemuan.show', $pertemuan->id) }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-eye"></i> View</a>
                                 <a @if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris')
                                   href="{{ route('pertemuan.edit', $pertemuan->id) }}"
                                 @else
                                   href="{{ route('iuran.edit', $pertemuan->id) }}"
+                                  @if ($tglNow > $pertemuan->tanggal)
+                                    onclick="return false;"
+                                    disabled
+                                  @endif
                                 @endif type="button" class="btn btn-round btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
                                 <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$pertemuan->id}})" 
                                     data-target="#DeleteModal" class="btn btn-round btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>

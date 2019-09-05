@@ -74,9 +74,9 @@
                                 <td>{{ $user->jabatan }}</td>
                               @endif
                               @if ($user->is_active == 1)
-                                <td>Aktif</td>
+                                <td><i class="fa fa-check"> Aktif</i></td>
                               @else
-                                <td>Tidak Aktif</td>
+                                <td><i class="fa fa-close"> Tidak Aktif</i></td>
                               @endif
                               <td class="col-md-2">
                                 <a href="{{ route('users.edit', $user->id) }}" type="button" class="btn btn-round btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>

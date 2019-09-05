@@ -39,7 +39,10 @@ Route::group(['middleware' => ['web', 'auth']], function(){
 		Route::put('profile', 'Member\DashboardController@profile_update')->name('member.profile_update');
 		Route::resource('pertemuan', 'Member\PertemuanController');
 		// bendahara
-		Route::get('iuran/{id}', 'Member\BendaharaController@edit_iuran')->name('iuran.edit');
+		Route::get('tambah-iuran', 'Member\BendaharaController@create')->name('iuran.create');
+		Route::post('tambah-iuran', 'Member\BendaharaController@store')->name('iuran.store');
+		Route::get('iuran/{id}', 'Member\BendaharaController@edit')->name('iuran.edit');
+		Route::put('iuran/{id}', 'Member\BendaharaController@update')->name('iuran.update');
 
 		// sekretaris
 		Route::get('tambah-notulen', 'Member\SekretarisController@create')->name('notulen.create');

@@ -29,7 +29,7 @@
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                           <div class="x_title">
-                            <h2>Tambah Notulen <small>Manajemen Pertemuan</small></h2>
+                            <h2>Tambah Notulen <small>Manajemen Sekretaris</small></h2>
                             <div class="clearfix"></div>
                           </div>
                           <div class="x_content">
@@ -45,8 +45,8 @@
                               </div>
                               <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Tanggal</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                  <span class="place">{{ date('d F Y', strtotime($pertemuan->tanggal)) }}</span>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="padding-top: 7px;">
+                                  <span>{{ date('d F Y', strtotime($pertemuan->tanggal)) }}</span>
                                 </div>
                               </div>
                               <div class="form-group">

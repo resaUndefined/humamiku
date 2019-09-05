@@ -17,7 +17,7 @@ class CreteTableKasflow extends Migration
             $table->increments('id');
             $table->integer('kas_id')->unsigned();
             $table->date('tanggal');
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(1)->comment = '1 for debit, 0 for kredit';
             $table->string('nominal');
             $table->string('keterangan')->nullable();
             $table->timestamps();

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Validator;
 use App\Model\Pertemuan;
+use App\Model\Iuran;
 use Auth;
 use Carbon\Carbon;
 
@@ -23,9 +24,11 @@ class PertemuanController extends Controller
             
             $pertemuans = Pertemuan::orderBy('created_at', 'DESC')->paginate(10);
             $pertemuanCek = Pertemuan::whereNull('total_iuran')->first();
+            $tglNow = Carbon::now()->format('Y-m-d');
             return view('member.pertemuan.index', [
                 'pertemuans' => $pertemuans,
                 'pertemuanCek' => $pertemuanCek,
+                'tglNow' => $tglNow,
             ]);
         }
         return redirect()->route('home');
@@ -80,7 +83,19 @@ class PertemuanController extends Controller
      */
     public function show($id)
     {
-        //
+        if ((Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris') || (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara')) {
+            $pertemuan = Pertemuan::where('id', $id)->first();
+            if (is_null($pertemuan)) {
+                return redirect()->route('pertemuan.index')->with('gagal', 'Maaf pertemuan tidak ditemukan');
+            }
+            $iurans = Iuran::where('id', $id)->get();
+
+            return view('member.pertemuan.show', [
+                'pertemuan' => $pertemuan,
+                'iurans' => $iurans,
+            ]);
+        }
+        return redirect()->route('home');
     }
 
     /**
