@@ -29,8 +29,9 @@
                       <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                           <div class="x_title">
-                        <a href="{{ route('kasflow.create') }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Cash Flow</a>
-                            {{-- <h2>List Kas Flow <small>Manajemen Kas</small></h2> --}}
+                            @if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara')
+                              <a href="{{ route('kasflow.create') }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Cash Flow</a>
+                            @endif
                             <div class="clearfix"></div>
                           </div>
                           <div class="x_content">
@@ -83,7 +84,7 @@
                     </div>
                     <div class="form-group">
                       <div class="col-md-12 col-sm-12 col-xs-12 text-right">
-                        <a href="show_pertemuan.html" type="button" class="btn btn-round btn-info btn-sm"><i class="fa fa-download"></i> Lihat Selengkapnya</a>
+                        <a href="{{ route('download.kas') }}" type="button" class="btn btn-round btn-info btn-sm"><i class="fa fa-download"></i> Lihat Selengkapnya</a>
                       </div>
                     </div>
                   </div>

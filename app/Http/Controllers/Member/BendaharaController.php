@@ -13,6 +13,7 @@ use App\Model\Kasflow;
 use App\User;
 use Auth;
 use Carbon\Carbon;
+use PDF;
 
 class BendaharaController extends Controller
 {
@@ -384,7 +385,7 @@ class BendaharaController extends Controller
 
     public function kasflow_list()
     {
-    	if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara' || Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua') {
+    	// if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara' || Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua') {
     		$listKas = Kas::where('id', '!=', 1)->orderBy('id', 'DESC')->get()->take(5);
     		// $lastKas = Kas::where()
     		$data = [];
@@ -412,11 +413,41 @@ class BendaharaController extends Controller
     				$data[] =  $data2;
     			}
     		}
-    		
+
     		return view('member.bendahara.list_kasflow', [
     			'data' => $data,
     		]);
-    	}
+    	// }
+    }
+
+
+    public function download_kas()
+    {
+		$listKas = Kas::where('id', '!=', 1)->get();
+		$data = [];
+		$j = count($listKas);
+		for ($i=0; $i <$j ; $i++) {
+			$kasflow = Kasflow::where('kas_id',$listKas[$i]->id)->get();
+			$jumTmp = count($kasflow);
+			for ($x=0; $x <$jumTmp+1 ; $x++) { 
+				$data2 = new \stdClass();
+				if ($x == $jumTmp) {
+					$data2->tanggal = $listKas[$i]->tanggal;
+					$data2->keterangan = 'sisa saldo';
+					$data2->status = 2;
+					$data2->nominal = $listKas[$i]->sisa_saldo;
+				}else{
+					$data2->tanggal = $kasflow[$x]->tanggal;
+					$data2->keterangan = $kasflow[$x]->keterangan;
+					$data2->status = $kasflow[$x]->status;
+					$data2->nominal = $kasflow[$x]->nominal;
+				}
+				$data[] =  $data2;
+			}
+		}
+		$pdf = PDF::loadView('member.bendahara.kas_pdf', ['data' => $data]);
+
+		return $pdf->download('kas.pdf');
     }
 
 }
