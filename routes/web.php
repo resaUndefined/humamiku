@@ -27,10 +27,9 @@ Route::group(['middleware' => ['web', 'auth', 'isAdmin']], function(){
 	    Route::resource('roles', 'Admin\RoleController');
 	    Route::resource('jabatan', 'Admin\JabatanController');
 	    Route::resource('users', 'Admin\UserController');
-	    // Route::get('user/profile', 'Admin\UserController@profile')->name('users.profile');
 	});
 });
-Route::group(['middleware' => ['web', 'auth']], function(){
+Route::group(['middleware' => ['web', 'auth', 'isMember']], function(){
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::get('logout', 'LoginController@logout')->name('logout.custom');
 	Route::get('/member', 'Member\DashboardController@index')->name('member');
@@ -44,6 +43,9 @@ Route::group(['middleware' => ['web', 'auth']], function(){
 		Route::get('edit-iuran/{id}', 'Member\BendaharaController@edit')->name('iuran.edit');
 		Route::put('edit-iuran/{id}', 'Member\BendaharaController@update')->name('iuran.update');
 		Route::get('lihat-iuran/{id}', 'Member\BendaharaController@show')->name('iuran.show');
+		Route::get('list-kasflow', 'Member\BendaharaController@kasflow_list')->name('kasflow.list');
+		Route::get('kasflow', 'Member\BendaharaController@kasflow_create')->name('kasflow.create');
+		Route::post('kasflow', 'Member\BendaharaController@kasflow_store')->name('kasflow.store');
 
 		// sekretaris
 		Route::get('tambah-notulen', 'Member\SekretarisController@create')->name('notulen.create');

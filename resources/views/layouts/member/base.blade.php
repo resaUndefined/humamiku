@@ -78,7 +78,7 @@
                   @endif
                   @if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara')
                     <li><a href="{{ route('pertemuan.index') }}"><i class="fa fa-dollar"></i> Manajemen KAS </a></li>
-                    <li><a href="#"><i class="fa fa-dollar"></i> Manajemen Cash Flow </a></li>
+                    <li><a href="{{ route('kasflow.list') }}"><i class="fa fa-dollar"></i> Manajemen Cash Flow </a></li>
                   @endif
                 </ul>
               </div>

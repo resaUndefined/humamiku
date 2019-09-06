@@ -337,4 +337,86 @@ class BendaharaController extends Controller
     	return redirect()->route('home');
     }
 
+
+    public function kasflow_create()
+    {
+    	if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara') {
+    		return view('member.bendahara.kasflow_create');
+    	}
+    	return redirect()->route('home');
+    }
+
+
+    public function kasflow_store(Request $request)
+    {
+    	$kasLast = Kas::where('sisa_saldo', '!=', null)->orderBy('id', 'DESC')->first();
+    	$kas = new Kas();
+    	$now = Carbon::now()->format('Y-m-d');
+    	$kas->tanggal = $now;
+    	$kas->save();
+    	$kreditTmp = 0;
+    	$debitTmp = 0;
+    	$hasilTmp = 0;
+    	$jumlah = count($request->item_nominal);
+    	for ($i=0; $i <$jumlah ; $i++) { 
+    		$kasflow = new Kasflow();
+    		$kasflow->kas_id = $kas->id;
+    		if ($request->item_jenis[$i] == 1 || $request->item_jenis[$i] == '1') {
+    			$debitTmp+=(int)$request->item_nominal[$i];
+    		}else{
+    			$kreditTmp+=(int)$request->item_nominal[$i];
+    		}
+    		$kasflow->status = $request->item_jenis[$i];
+    		$kasflow->nominal = $request->item_nominal[$i];
+    		$kasflow->keterangan = $request->item_ket[$i];
+    		$kasflow->tanggal = $now;
+    		$kasflow->save();
+    	}
+    	$hasilTmp = $debitTmp - $kreditTmp;
+    	$kas->sisa_saldo = (int)$kasLast->sisa_saldo + (int)$hasilTmp;
+    	$updateKas = $kas->save();
+    	if ($updateKas) {
+    		return redirect()->route('kasflow.list')->with('sukses', 'Kas flow berhasil ditambahkan');
+    	}
+    	return redirect()->route('kasflow.create')->with('gagal', 'Kas flow gagal ditambahkan');
+    }
+
+
+    public function kasflow_list()
+    {
+    	if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara' || Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua') {
+    		$listKas = Kas::where('id', '!=', 1)->orderBy('id', 'DESC')->get()->take(5);
+    		// $lastKas = Kas::where()
+    		$data = [];
+    		$y = null;
+    		$j = count($listKas);
+    		for ($i=0; $i <$j ; $i++) {
+    			$y+=1;
+    			$idTmp = null; 
+    			$idTmp = $j - $y;
+    			$kasflow = Kasflow::where('kas_id',$listKas[$idTmp]->id)->get();
+    			$jumTmp = count($kasflow);
+				for ($x=0; $x <$jumTmp+1 ; $x++) { 
+					$data2 = new \stdClass();
+    				if ($x == $jumTmp) {
+    					$data2->tanggal = $listKas[$idTmp]->tanggal;
+    					$data2->keterangan = 'sisa saldo';
+    					$data2->status = 2;
+    					$data2->nominal = $listKas[$idTmp]->sisa_saldo;
+    				}else{
+    					$data2->tanggal = $kasflow[$x]->tanggal;
+    					$data2->keterangan = $kasflow[$x]->keterangan;
+    					$data2->status = $kasflow[$x]->status;
+    					$data2->nominal = $kasflow[$x]->nominal;
+    				}
+    				$data[] =  $data2;
+    			}
+    		}
+    		
+    		return view('member.bendahara.list_kasflow', [
+    			'data' => $data,
+    		]);
+    	}
+    }
+
 }
