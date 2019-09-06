@@ -81,15 +81,14 @@
                               @endif
                               <td class="col-md-3">
                                 <a href="{{ route('pertemuan.show', $pertemuan->id) }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-eye"></i> View</a>
-                                <a @if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris')
-                                  href="{{ route('pertemuan.edit', $pertemuan->id) }}"
-                                @else
-                                  href="{{ route('iuran.edit', $pertemuan->id) }}"
-                                  @if ($tglNow > $pertemuan->tanggal)
+                                @if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris')
+                                  <a href="{{ route('pertemuan.edit', $pertemuan->id) }}" type="button" class="btn btn-round btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                                @elseif(Auth::user()->jabatan->jabatan == 'Bendahara' || Auth()->user()->jabatan->jabatan == 'bendahara')
+                                  <a href="{{ route('iuran.edit', $pertemuan->id) }}" type="button" class="btn btn-round btn-info btn-sm" @if ($tglNow > $pertemuan->tanggal)
                                     onclick="return false;"
                                     disabled
-                                  @endif
-                                @endif type="button" class="btn btn-round btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
+                                  @endif><i class="fa fa-edit"></i> Edit</a>
+                                @endif
                                 @if (!is_null($pertemuan->total_iuran))
                                   <a href="{{ route('iuran.show', $pertemuan->id) }}" type="button" class="btn btn-round btn-primary btn-sm"><i class="fa fa-money"></i> Iuran</a>
                                 @endif

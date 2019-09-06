@@ -26,7 +26,7 @@
     <link href="{{ URL::asset('dashboard/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{ URL::asset('dashboard/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
-
+    <script src="{{ URL::asset('dashboard/vendors/Chart.js/dist/Chart.min.js') }}"></script>
     <!-- Custom Theme Style -->
     <link href="{{ URL::asset('dashboard/css/custom.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('dashboard/css/style.css') }}" rel="stylesheet">
@@ -68,9 +68,12 @@
                     <li><a href="{{ route('kehadiranku') }}"><i class="fa fa-check-square-o"></i> Check Kehadiran </a></li>
                     <li><a href="{{ route('iuranku') }}"><i class="fa fa-check-square-o"></i> Check Iuran KAS </a></li>
                   @endif
-                  <li><a href="#"><i class="fa fa-check-square-o"></i> Check Notulen </a></li>
+                  <li><a href="{{ route('notulen.list') }}"><i class="fa fa-check-square-o"></i> Check Notulen </a></li>
                   <li><a href="#"><i class="fa fa-check-square-o"></i> Check Saldo KAS </a></li>
-                  @if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris')
+                  @if (Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua')
+                    <li><a href="{{ route('list.user') }}"><i class="fa fa-user"></i> Manajemen User </a></li>
+                  @endif
+                  @if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris' || Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua')
                     <li><a href="{{ route('pertemuan.index') }}"><i class="fa fa-table"></i> Manajemen Pertemuan </a></li>
                   @endif
                   @if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara')

@@ -44,6 +44,77 @@ class MemberController extends Controller
 
     public function hadir()
     {
-    	
+    	$iurans = Iuran::where('user_id', Auth::id())->paginate(15);
+    	$hadir = 0;
+    	$tidakHadir = 0;
+		foreach ($iurans as $key => $iuran) {
+			if ($iuran->hadir == 1 OR $iuran->hadir == '1') {
+				$hadir+=1;
+			}else{
+				$tidakHadir+=1;
+			}
+    		$pertemuan = Pertemuan::where('id', $iuran->pertemuan_id)->first();
+    		$iuran->tempat = $pertemuan->tempat;
+    		$iuran->tanggal = $pertemuan->tanggal;
+    	}
+    	return view('member.anggota.kehadiran', [
+    		'iurans' => $iurans,
+    		'hadir' => $hadir,
+    		'tidakHadir' => $tidakHadir,
+    	]);
+    }
+
+
+    public function list_notulen(Request $request)
+    {
+    	$pertemuans = Pertemuan::orderBy('created_at', 'DESC')->paginate(10);
+
+    	return view('member.anggota.notulen_list', [
+    		'pertemuans' => $pertemuans
+    	]);
+    }
+
+
+    public function detail_notulen($id)
+    {
+    	$pertemuan = Pertemuan::where('id', $id)->first();
+    	if (!is_null($pertemuan)) {
+    		return view('member.anggota.detail_notulen', [
+    			'pertemuan' => $pertemuan
+    		]);
+    	}
+    	return redirect()->route('notulen.list')->with('gagal', 'Maaf Pertemuan tidak ditemukan');
+    }
+
+
+    public function list_user()
+    {
+    	if (Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua') {
+	    		$users = DB::table('users')
+	                ->join('roles', 'roles.id', '=', 'users.role_id')
+	                ->leftJoin('jabatan', 'jabatan.id', '=', 'users.jabatan_id')
+	                ->select('users.id','users.name','users.email', 'users.is_active', 'roles.role_name as role', 'jabatan.jabatan as jabatan')
+	                ->paginate(10);
+
+	        return view('member.anggota.list_user', [
+	            'users' => $users
+	        ]);
+	    }
+	    return redirect()->route('home');
+    }
+
+
+    public function detail_user($id)
+    {
+    	if (Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua') {
+    		$user = DB::table('users')
+	                ->leftJoin('jabatan', 'jabatan.id', '=', 'users.jabatan_id')
+	                ->select('users.*', 'jabatan.jabatan as jabatan')
+	                ->where('users.id', $id)
+	                ->first();
+	        return view('member.anggota.detail_user', [
+	        	'user' => $user
+	        ]);
+    	}
     }
 }

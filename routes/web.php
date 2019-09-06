@@ -52,5 +52,9 @@ Route::group(['middleware' => ['web', 'auth']], function(){
 		// member
 		Route::get('iuranku', 'Member\MemberController@index')->name('iuranku');
 		Route::get('kehadiranku', 'Member\MemberController@hadir')->name('kehadiranku');
+		Route::get('list-notulen', 'Member\MemberController@list_notulen')->name('notulen.list');
+		Route::get('detail-notulen/{id}', 'Member\MemberController@detail_notulen')->name('notulen.show');
+		Route::get('list-user', 'Member\MemberController@list_user')->name('list.user');
+		Route::get('detail-user/{id}', 'Member\MemberController@detail_user')->name('detail.user');
 	});
 });
