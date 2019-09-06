@@ -1,0 +1,27 @@
+.jumbotron {
+	background: #fff;
+}
+
+th.th-table {
+	background: rgba(52,73,94,.94);
+    color: #ECF0F1;
+}
+
+select{
+	font-weight: normal;
+}
+
+.entries{
+	display: initial;
+    width: 75px;
+}
+
+span.place {
+	font-weight: 700;
+	font-style: italic;
+}
+
+/*img.img-jumbotron {
+	width: 50%;
+	height: auto;
+}*/

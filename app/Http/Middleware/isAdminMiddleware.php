@@ -15,8 +15,9 @@ class isAdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        
-        dd(auth()->user()->role->level);
-        return $next($request);
+        if (auth()->user()->role->level == 1) {
+            return $next($request);
+        }
+        return redirect()->route('home')->with('error','You have not admin access');
     }
 }

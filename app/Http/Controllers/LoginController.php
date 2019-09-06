@@ -26,7 +26,7 @@ class LoginController extends Controller
 				if ($user->role->level == 1) {
 	    			return redirect()->route('admin');
 	    		}
-	    		return redirect()->route('user');
+	    		return redirect()->route('member');
 		    }
 	    	return redirect()->back()->with('message', 'Maaf Kombinasi email dan password tidak sesuai');
     	}

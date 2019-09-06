@@ -1,95 +1,245 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
 
-        <title>Laravel</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Humamiku - Himpunan Muda-Mudi Kepuh</title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+  <link rel="icon" type="image/png" sizes="96x96" href="{{ URL::asset('front/img/ring.jpg') }}">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
+  <link href="{{ URL::asset('dashboard/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('front/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('front/css/animate.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ URL::asset('front/css/style-home.css') }}">
+</head>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" onload="myFunction()">
+  <div class="header">
+    <div class="bg-color">
+      <header id="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#lauraMenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a href="index.html">
+                <img src="{{ URL::asset('front/img/ring.jpg') }}" alt="" class="img-logo"><span class="navbar-brand" href="#">Humamiku</span>
+              </a>
             </div>
+            <div class="collapse navbar-collapse" id="lauraMenu">
+              <ul class="nav navbar-nav navbar-right navbar-border">
+                @if (Auth::check())
+                    <li class="active"><a href="{{ route('home') }}">Dashboard</a></li>
+                    <li><a href="{{ route('logout') }}">Logout</a></li>
+                @else
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
+                @endif
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 wow fadeIn delay-05s">
+              <div class="banner-text">
+                <h2>Selamat Datang di Website HUMAMIKU</h2>
+                <p>Himpunan Muda-Mudi Kepuh</p>
+              </div>
+              <div class="overlay-detail text-center">
+                <a href="#footer"><i class="fa fa-angle-down"></i></a>
+              </div>
+            </div>
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+  </div>
+  <!-- <section id="about" class="section-padding wow fadeIn delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-right">
+          <h2 class="title-text">
+            Meet<br><span class="deco">Laura</span> Thomson
+          </h2>
+        </div>
+        <div class="col-md-6 text-left">
+          <div class="about-text">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p>&nbsp;</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <p>&nbsp;</p>
+            <ul class="abt-list">
+              <li>- Excepteur sint occaecat cupidatat non proident.</li>
+              <li>- Duis aute irure dolor in reprehenderit.</li>
+              <li>- Ask the experts.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="portfolio" class="section-padding wow fadeInUp delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="title text-center">Let's <span class="deco">See</span> My Work</h2>
+        </div>
+        <div class="col-md-12">
+          <div id="myGrid" class="grid-padding">
+            <div class="col-md-4 col-sm-4 padding-right-zero">
+              <img src="img/portfolio01.jpg" class="img-responsive">
+              <img src="img/port01.jpg" class="img-responsive">
+              <img src="img/port02.jpg" class="img-responsive">
+              <img src="img/portfolio01.jpg" class="img-responsive">
+            </div>
+            <div class="col-md-4 col-sm-4 padding-right-zero">
+              <img src="img/portfolio02.jpg" class="img-responsive">
+              <img src="img/port01.jpg" class="img-responsive">
+              <img src="img/port02.jpg" class="img-responsive">
+              <img src="img/portfolio01.jpg" class="img-responsive">
+              <img src="img/port03.jpg" class="img-responsive">
+            </div>
+            <div class="col-md-4 col-sm-4 padding-right-zero">
+              <img src="img/port01.jpg" class="img-responsive">
+              <img src="img/portfolio01.jpg" class="img-responsive">
+              <img src="img/portfolio02.jpg" class="img-responsive">
+              <img src="img/port03.jpg" class="img-responsive">
+              <img src="img/portfolio02.jpg" class="img-responsive">
+              <img src="img/port02.jpg" class="img-responsive">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="testimonial" class="section-padding wow fadeInUp">
+    <div class="container">
+      <div class="row">
+        <h2 class="title text-center">See What Our <span class="deco">Client</span> Are Saying ?</h2>
+        <div class="test-sec">
+          <div class="col-sm-4">
+            <blockquote>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamsed commodo nibh ante facilisis bibendum dolor feugiat at. </p>
+            </blockquote>
+            <div class="carousel-info">
+              <div class="pull-left"> <span class="testimonials-name">John Doe</span> <span class="testimonials-post">CEO,  Company Inc.</span> </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <blockquote>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamsed commodo nibh ante facilisis bibendum dolor feugiat at. </p>
+            </blockquote>
+            <div class="carousel-info">
+              <div class="pull-left"> <span class="testimonials-name">John Doe</span> <span class="testimonials-post">CEO,  Company Inc.</span> </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <blockquote>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diamsed commodo nibh ante facilisis bibendum dolor feugiat at. </p>
+            </blockquote>
+            <div class="carousel-info">
+              <div class="pull-left"> <span class="testimonials-name">John Doe</span> <span class="testimonials-post">CEO,  Company Inc.</span> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="section-padding wow fadeIn delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="contact-sec text-center">
+            <h2>Want To <span class="deco">Hire</span> Me?</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+          </div>
+        </div>
+
+        <div class="col-md-8 col-md-push-2">
+          <div id="sendmessage">Your message has been sent. Thank you!</div>
+          <div id="errormessage"></div>
+          <form action="" method="post" role="form" class="contactForm">
+            <div class="form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+              <div class="validation"></div>
+            </div>
+
+            <div class="text-center"><button type="submit" class="btn btn-primary btn-lg">Send Message</button></div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section> -->
+  <footer id="footer" class="footer-2 text-center-xs bg--white wow fadeIn delay-05s">
+    <div class="container">
+      <!--end row-->
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="footer">
+            © Copyright HUMAMIKU - Himpunan Muda-Mudi Kepuh
+            <div class="credits">
+              <!--
+                All the links in the footer should remain intact. 
+                You can delete the links only if you purchased the pro version.
+                Licensing information: https://bootstrapmade.com/license/
+                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Laura
+              -->
+              Contact <a href="mailto:humamiku.kepuh@gmail.com">humamiku.kepuh@gmail.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-12 text-right">
+          <ul class="social-list">
+            <li>
+              <a href="https://www.instagram.com/humamiku_kepuh/" class="social-ig"><i class="fa fa-instagram"></i></a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/humamiku.kepuh.7" class="social-fb"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/channel/UCzDSXj0dDG5MfUfN7IvC4yw" class="social-youtube"><i class="fa fa-youtube"></i></a>
+            </li>
+            <li>
+              <a href="mailto:humamiku.kepuh@gmail.com" class="social-google"><i class="fa fa-google-plus"></i></a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <!--end row-->
+    </div>
+  </footer>
+
+  <script src="{{ URL::asset('front/js/jquery.min.js') }}"></script>
+  <script src="{{ URL::asset('front/js/jquery.easing.min.js') }}"></script>
+  <script src="{{ URL::asset('front/js/bootstrap.min.js') }}"></script>
+  {{-- <script src="{{ URL::asset('front/js/jquery.bxslider.min.js') }}"></script> --}}
+  <script src="{{ URL::asset('front/js/wow.js') }}"></script>
+  <script src="{{ URL::asset('front/js/custom.js') }}"></script>
+  {{-- <script src="{{ URL::asset('front/js/jquery.min.js') }}contactform/contactform.js"></script> --}}
+
+</body>
+
 </html>
