@@ -46,6 +46,7 @@ Route::group(['middleware' => ['web', 'auth', 'isMember']], function(){
 		Route::get('list-kasflow', 'Member\BendaharaController@kasflow_list')->name('kasflow.list');
 		Route::get('kasflow', 'Member\BendaharaController@kasflow_create')->name('kasflow.create');
 		Route::post('kasflow', 'Member\BendaharaController@kasflow_store')->name('kasflow.store');
+		Route::get('download-kas','Member\BendaharaController@download_kas')->name('download.kas');
 
 		// sekretaris
 		Route::get('tambah-notulen', 'Member\SekretarisController@create')->name('notulen.create');
