@@ -298,4 +298,43 @@ class BendaharaController extends Controller
     	}
     	return redirect()->route('home');
     }
+
+
+    public function show($id)
+    {
+    	if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris' || Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara' || Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua') {
+    		$pertemuan = Pertemuan::where('id', $id)->first();
+	    	if (!is_null($pertemuan)) {
+	    		$pertemuanIuran = Iuran::where('pertemuan_id', $pertemuan->id)->paginate(15);
+	    		$hadir = 0;
+	    		$nitip = 0;
+	    		$tidakHadir = 0;
+	    		foreach ($pertemuanIuran as $key => $pi) {
+	    			$memberTmp = User::where('id', $pi->user_id)->first(['name']);
+	    			$pi->anggota = $memberTmp->name;
+	    			if ($pi->iuran == 0 || $pi->iuran == '0') {
+	    				$pi->hadir = 2;
+	    				$tidakHadir+=1;
+	    			}else{
+	    				if ($pi->hadir == 1 OR $pi->hadir == '1') {
+	    					$hadir+=1;
+	    				}else{
+	    					$nitip+=1;
+	    				}
+	    			}
+	    		}
+
+	    		return view('member.bendahara.show', [
+	    			'pertemuan' => $pertemuan,
+	    			'pertemuanIuran' => $pertemuanIuran,
+	    			'hadir' => $hadir,
+	    			'nitip' => $nitip,
+	    			'tidakHadir' => $tidakHadir,
+	    		]);
+	    	}
+	    	return redirect('member/pertemuan/$id')->with('gagal', 'Maaf pertemuan tidak ditemukan');	
+    	}
+    	return redirect()->route('home');
+    }
+
 }

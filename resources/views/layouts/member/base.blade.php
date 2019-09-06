@@ -64,10 +64,12 @@
                 <ul class="nav side-menu">
                   <li><a href="{{ route('home') }}"><i class="fa fa-home"></i> Dashboard </a></li>
                   <li><a href="{{ route('member.profile') }}"><i class="fa fa-users"></i> Manajemen Profile </a></li>
-                  <li><a href="#"><i class="fa fa-check-square-o"></i> Check Kehadiran </a></li>
+                  @if (!is_null(Auth::user()->iuran) OR !empty(Auth::user()->iuran))
+                    <li><a href="{{ route('kehadiranku') }}"><i class="fa fa-check-square-o"></i> Check Kehadiran </a></li>
+                    <li><a href="{{ route('iuranku') }}"><i class="fa fa-check-square-o"></i> Check Iuran KAS </a></li>
+                  @endif
                   <li><a href="#"><i class="fa fa-check-square-o"></i> Check Notulen </a></li>
                   <li><a href="#"><i class="fa fa-check-square-o"></i> Check Saldo KAS </a></li>
-                  <li><a href="#"><i class="fa fa-check-square-o"></i> Check Iuran KAS </a></li>
                   @if (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris')
                     <li><a href="{{ route('pertemuan.index') }}"><i class="fa fa-table"></i> Manajemen Pertemuan </a></li>
                   @endif

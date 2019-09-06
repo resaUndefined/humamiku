@@ -41,11 +41,16 @@ Route::group(['middleware' => ['web', 'auth']], function(){
 		// bendahara
 		Route::get('tambah-iuran', 'Member\BendaharaController@create')->name('iuran.create');
 		Route::post('tambah-iuran', 'Member\BendaharaController@store')->name('iuran.store');
-		Route::get('iuran/{id}', 'Member\BendaharaController@edit')->name('iuran.edit');
-		Route::put('iuran/{id}', 'Member\BendaharaController@update')->name('iuran.update');
+		Route::get('edit-iuran/{id}', 'Member\BendaharaController@edit')->name('iuran.edit');
+		Route::put('edit-iuran/{id}', 'Member\BendaharaController@update')->name('iuran.update');
+		Route::get('lihat-iuran/{id}', 'Member\BendaharaController@show')->name('iuran.show');
 
 		// sekretaris
 		Route::get('tambah-notulen', 'Member\SekretarisController@create')->name('notulen.create');
 		Route::post('tambah-notulen', 'Member\SekretarisController@store')->name('notulen.store');
+
+		// member
+		Route::get('iuranku', 'Member\MemberController@index')->name('iuranku');
+		Route::get('kehadiranku', 'Member\MemberController@hadir')->name('kehadiranku');
 	});
 });

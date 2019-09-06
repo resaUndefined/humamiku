@@ -90,8 +90,10 @@
                                     disabled
                                   @endif
                                 @endif type="button" class="btn btn-round btn-info btn-sm"><i class="fa fa-edit"></i> Edit</a>
-                                <a href="javascript:;" data-toggle="modal" onclick="deleteData({{$pertemuan->id}})" 
-                                    data-target="#DeleteModal" class="btn btn-round btn-danger btn-sm"><i class="fa fa-trash"></i> Delete</a>
+                                @if (!is_null($pertemuan->total_iuran))
+                                  <a href="{{ route('iuran.show', $pertemuan->id) }}" type="button" class="btn btn-round btn-primary btn-sm"><i class="fa fa-money"></i> Iuran</a>
+                                @endif
+                                
                               </td>
                             </tr>
                           @endforeach

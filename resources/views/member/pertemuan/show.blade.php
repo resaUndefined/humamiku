@@ -66,8 +66,8 @@
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <a href="{{ route('pertemuan.index') }}" type="button" class="btn btn-primary"><i class="fa fa-rotate-left"></i> Kembali</a>
-                          @if (!is_null($pertemuan->total_iuran))
-                            <a href="#" type="button" class="btn btn-info"><i class="fa fa-money"></i> Cek Iuran</a>
+                          @if (!is_null($pertemuan->total_iuran) && (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris' || Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara' || Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua'))
+                            <a href="{{ route('iuran.show', $pertemuan->id) }}" type="button" class="btn btn-info"><i class="fa fa-money"></i> Cek Iuran</a>
                           @endif
                         </div>
                       </div>
