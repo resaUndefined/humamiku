@@ -13,13 +13,15 @@
         <span class="count_bottom"><i class="fa fa-chevron-circle-right"></i> Tempat <strong>{{ $nextPertemuan->tempat }}</strong></span>
         @endif
       </div>
-      <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
+      @if (!is_null($prevPertemuan))
+        <div class="col-md-3 col-sm-3 col-xs-12 tile_stats_count">
         {{-- <a href="{{ route('notulen.show', $prevPertemuan->id) }}"> --}}
           <span class="count_top"><i class="fa fa-dollar"></i> Total Iuran</span>
           <div class="count">@currency($prevPertemuan->total_iuran)</div>
           <span class="count_bottom"><i class="fa fa-chevron-circle-right"></i> Dari Pertemuan Sebelumnya</span>
         {{-- </a>   --}}
       </div>
+      @endif
       <div class="col-md-4 col-sm-4 col-xs-12 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Total KAS</span>
         <div class="count">@currency($kas->sisa_saldo)</div>
@@ -44,27 +46,30 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-          <div class="x_content">
-            @for ($i = 0; $i <5 ; $i++)
-              <div class="widget_summary">
-                <div class="w_left w_25" style="width:35%;">
-                  <span>@if ($tglArr[$i] != '-')
-                    {{ date('d F Y', strtotime($tglArr[$i])) }}
-                    @else
-                    -
-                  @endif</span>
-                </div>
-                <div class="w_center w_55" style="width:65%;">
-                  <div class="progress">
-                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ $persenIur[$i] }}%;">
-                        <span>@currency($iurArr[$i])</span>
+          @if (count($iurans) > 0)
+            <div class="x_content">
+              @for ($i = 0; $i <5 ; $i++)
+                <div class="widget_summary">
+                  <div class="w_left w_25" style="width:35%;">
+                    <span>@if ($tglArr[$i] != '-')
+                      {{ date('d F Y', strtotime($tglArr[$i])) }}
+                      @else
+                      -
+                    @endif</span>
+                  </div>
+                  <div class="w_center w_55" style="width:65%;">
+                    <div class="progress">
+                      <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{ $persenIur[$i] }}%;">
+                          <span>@currency($iurArr[$i])</span>
+                      </div>
                     </div>
                   </div>
+                  <div class="clearfix"></div>
                 </div>
-                <div class="clearfix"></div>
-              </div>
-            @endfor
-          </div>
+              @endfor
+            </div>
+          @endif
+          
         </div>
       </div>
       <div class="col-md-6 col-sm-6 col-xs-12">
