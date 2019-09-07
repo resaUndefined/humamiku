@@ -117,4 +117,63 @@ class MemberController extends Controller
 	        ]);
     	}
     }
+
+
+    public function kehadiran()
+    {
+    	if (Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua') {
+    		$users = User::where('role_id', '!=', 1)->where('is_active',1)->orderBy('name')->paginate(10);
+    		if (count($users) > 0) {
+    			foreach ($users as $key => $user) {
+    				$hadirTmp = 0;
+    				$tidakHadirTmp = 0;
+    				$pertemuanTmp = 0;
+    				$iurans = Iuran::where('user_id',$user->id)->get();
+    				if (count($iurans) > 0) {
+    					foreach ($iurans as $key => $i) {
+    						$pertemuanTmp+=1;
+    						if ($i->hadir == 1) {
+    							$hadirTmp+=1;
+    						}else{
+    							$tidakHadirTmp+=1;
+    						}
+    					}
+    				}
+    				$user->hadir = $hadirTmp;
+    				$user->tidakHadir = $tidakHadirTmp;
+    				$user->pertemuan = $pertemuanTmp;
+    			}
+    		}
+    		return view('member.anggota.presensi', [
+    			'users' => $users
+    		]);
+    	}
+    	return redirect()->route('home');
+    }
+
+
+    public function kehadiran_show($id)
+    {
+    	if (Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua') {
+    		$pertemuans = Pertemuan::where('total_iuran', '!=', null)->where('notulen', '!=', null)->paginate(10);
+    		if (count($pertemuans) > 0) {
+    			foreach ($pertemuans as $key => $p) {
+    				$iuran = Iuran::where('pertemuan_id', $p->id)->where('user_id',$id)->first();
+    				if ($p->hadir == 1 || $p->hadir == '1') {
+    					$p->hadir = 'Hadir';
+    					$p->klas = 'success';
+    				}else{
+    					$p->hadir = 'Tidak Hadir';
+    					$p->klas = 'danger';
+    				}
+    			}
+    		}
+    		$user = User::where('id',$id)->first();
+    		return view('member.anggota.detail_presensi', [
+    			'pertemuans' => $pertemuans,
+    			'user' => $user,
+    		]);
+    	}
+    	return redirect()->route('home');
+    }
 }

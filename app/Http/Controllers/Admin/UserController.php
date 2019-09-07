@@ -24,6 +24,7 @@ class UserController extends Controller
                 ->join('roles', 'roles.id', '=', 'users.role_id')
                 ->leftJoin('jabatan', 'jabatan.id', '=', 'users.jabatan_id')
                 ->select('users.id','users.name','users.email', 'users.is_active', 'roles.role_name as role', 'jabatan.jabatan as jabatan')
+                ->orderBy('name')
                 ->paginate(10);
 
         return view('admin.user.index', [

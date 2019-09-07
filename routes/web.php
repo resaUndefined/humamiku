@@ -59,5 +59,7 @@ Route::group(['middleware' => ['web', 'auth', 'isMember']], function(){
 		Route::get('detail-notulen/{id}', 'Member\MemberController@detail_notulen')->name('notulen.show');
 		Route::get('list-user', 'Member\MemberController@list_user')->name('list.user');
 		Route::get('detail-user/{id}', 'Member\MemberController@detail_user')->name('detail.user');
+		Route::get('kehadiran-user', 'Member\MemberController@kehadiran')->name('kehadiran.index');
+		Route::get('kehadiran-user/{id}', 'Member\MemberController@kehadiran_show')->name('kehadiran.show');
 	});
 });

@@ -92,7 +92,6 @@
                                 @if (!is_null($pertemuan->total_iuran))
                                   <a href="{{ route('iuran.show', $pertemuan->id) }}" type="button" class="btn btn-round btn-primary btn-sm"><i class="fa fa-money"></i> Iuran</a>
                                 @endif
-                                
                               </td>
                             </tr>
                           @endforeach

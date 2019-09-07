@@ -69,7 +69,7 @@
                     <li><a href="{{ route('iuranku') }}"><i class="fa fa-check-square-o"></i> Check Iuran KAS </a></li>
                   @endif
                   <li><a href="{{ route('notulen.list') }}"><i class="fa fa-check-square-o"></i> Check Notulen </a></li>
-                  <li><a href="#"><i class="fa fa-check-square-o"></i> Check Saldo KAS </a></li>
+                  <li><a href="{{ route('kasflow.list') }}"><i class="fa fa-check-square-o"></i> Check Saldo KAS </a></li>
                   @if (Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua')
                     <li><a href="{{ route('list.user') }}"><i class="fa fa-user"></i> Manajemen User </a></li>
                   @endif
@@ -79,6 +79,9 @@
                   @if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara')
                     <li><a href="{{ route('pertemuan.index') }}"><i class="fa fa-dollar"></i> Manajemen KAS </a></li>
                     <li><a href="{{ route('kasflow.list') }}"><i class="fa fa-dollar"></i> Manajemen Cash Flow </a></li>
+                  @endif
+                  @if (Auth::user()->jabatan->jabatan == 'Ketua' || Auth::user()->jabatan->jabatan == 'ketua' || Auth::user()->jabatan->jabatan == 'Wakil Ketua' || Auth::user()->jabatan->jabatan == 'wakil ketua')
+                    <li><a href="{{ route('kehadiran.index') }}"><i class="fa fa-users"></i> Presensi</a></li>
                   @endif
                 </ul>
               </div>
