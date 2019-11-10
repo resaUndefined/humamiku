@@ -21,6 +21,9 @@ Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail
 Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset.token');
 Route::post('/password/reset', 'Auth\ResetPasswordController@reset')->name('password.request');
 Route::post('/login/custom', 'LoginController@login')->name('login.custom');
+Route::group(['middleware' => ['web', 'auth']], function(){
+	Route::get('logout', 'LoginController@logout')->name('logout.custom');
+});
 Route::group(['middleware' => ['web', 'auth', 'isAdmin']], function(){
 	Route::get('/admin', 'Admin\DashboardController@index')->name('admin');
 	Route::prefix('admin')->group(function () {
@@ -31,7 +34,6 @@ Route::group(['middleware' => ['web', 'auth', 'isAdmin']], function(){
 });
 Route::group(['middleware' => ['web', 'auth', 'isMember']], function(){
 	Route::get('/home', 'HomeController@index')->name('home');
-	Route::get('logout', 'LoginController@logout')->name('logout.custom');
 	Route::get('/member', 'Member\DashboardController@index')->name('member');
 	Route::prefix('member')->group(function () {
 		Route::get('profile', 'Member\DashboardController@profile')->name('member.profile');

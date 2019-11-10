@@ -63,7 +63,7 @@
                               </label>
                             </div>
                           </div>
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Seharusnya : @currency($member->kekurangannya)</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12 {{ $member->warna }}" style="color: #fff; font-weight: bold;">{{ $member->text }} : @currency($member->kekurangannya)</label>
                         </div>
                       @endforeach
                       <div class="ln_solid"></div>

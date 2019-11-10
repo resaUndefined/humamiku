@@ -92,6 +92,9 @@ class UserController extends Controller
             $user->jk = $request->gender;
             $user->ttl = $ttl[0][2].'-'.$ttl[0][0].'-'.$ttl[0][1];
             $user->is_active = 1;
+            if (!is_null($request->kekurangan_iuran)) {
+                $user->kekurangan_iuran = $request->kekurangan_iuran;
+            }
             $userSave = $user->save();
             if ($userSave) {
                 return redirect()->route('users.index')->with('sukses', 'User berhasil ditambahkan');
@@ -152,6 +155,7 @@ class UserController extends Controller
                         'jabatan' => 'required|exists:jabatan,id',
                         'gender' => 'required|boolean',
                         'status' => 'required|boolean',
+                        'kekurangan_iuran' => 'required|numeric',
                     ],
                     [
                         'email.required' => 'Email wajib diisi',
@@ -165,6 +169,8 @@ class UserController extends Controller
                         'gender.boolean' => 'Jenis kelamin tidak ditemukan',
                         'status.required' => 'Status harus diisi',
                         'status.boolean' => 'Status tidak ditemukan',
+                        'kekurangan_iuran.required' => 'nilai kekurangan harus diisi',
+                        'kekurangan_iuran.numeric' => 'nilai kekurangan harus berupa angka',
                     ]);
             }else{
                 $validator = Validator::make($request->all(), [
@@ -174,6 +180,7 @@ class UserController extends Controller
                         'jabatan' => 'required|exists:jabatan,id',
                         'gender' => 'required|boolean',
                         'status' => 'required|boolean',
+                        'kekurangan_iuran' => 'required|numeric',
                     ],
                     [
                         'password.min' => 'Minimal password 6 karakter',
@@ -188,6 +195,8 @@ class UserController extends Controller
                         'gender.boolean' => 'Jenis kelamin tidak ditemukan',
                         'status.required' => 'Status harus diisi',
                         'status.boolean' => 'Status tidak ditemukan',
+                        'kekurangan_iuran.required' => 'nilai kekurangan harus diisi',
+                        'kekurangan_iuran.numeric' => 'nilai kekurangan harus berupa angka',
                     ]);
             }
             if ($validator->fails()) {
@@ -206,6 +215,7 @@ class UserController extends Controller
                 $user->jabatan_id = $request->jabatan;
                 $user->jk = $request->gender;
                 $user->ttl = $ttl[0][2].'-'.$ttl[0][0].'-'.$ttl[0][1];
+                $user->kekurangan_iuran = $request->kekurangan_iuran;
                 $userSave = $user->save();
                 if ($userSave) {
                     return redirect()->route('users.index')->with('sukses', 'User berhasil diupdate');

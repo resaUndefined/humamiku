@@ -24,6 +24,7 @@ class User extends Authenticatable
         'ttl',
         'is_active',
         'token',
+        'kekurangan_iuran',
     ];
 
     /**

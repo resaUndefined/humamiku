@@ -89,7 +89,7 @@
                               </label>
                             </div>
                           </div>
-                          <label class="control-label col-md-3 col-sm-3 col-xs-12">Kekurangannya : @currency($pi->kekurangannya)</label>
+                          <label class="control-label col-md-3 col-sm-3 col-xs-12 {{ $pi->warna }}" style="color: #fff; font-weight: bold;">{{ $pi->text }} : @currency($pi->kekurangannya)</label>
                         </div>
                       @endforeach
                       <div class="ln_solid"></div>
