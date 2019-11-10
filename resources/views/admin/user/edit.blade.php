@@ -59,6 +59,12 @@
                         <strong>{{ $errors->first('gender') }}</strong>
                       </div>
                     @endif
+                    @if ($errors->has('kekurangan_iuran'))
+                      <div class="alert alert-warning alert-dismissible fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ $errors->first('kekurangan_iuran') }}</strong>
+                      </div>
+                    @endif
                     @if(Session::has('gagal'))
                       <div class="alert alert-warning alert-dismissible fade in">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -152,6 +158,13 @@
                           <input type="text" class="form-control has-feedback-left" id="single_cal3" placeholder="First Name" aria-describedby="inputSuccess2Status3" name="ttl" value="{{ $userData->ttl }}">
                           <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
                           <span id="inputSuccess2Status3" class="sr-only">(success)</span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Kekurangan Iuran
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="kekurangan_iuran" name="kekurangan_iuran" class="form-control col-md-7 col-xs-12" value="{{ $userData->kekurangan_iuran }}">
                         </div>
                       </div>
                       <div class="ln_solid"></div>

@@ -31,7 +31,7 @@
                           @if (is_null($pertemuanCek) && (Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris'))
                             <a href="{{ route('pertemuan.create') }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Pertemuan Berikutnya</a>
                           @elseif(!is_null($pertemuanCek))
-                            @if (Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara')
+                            @if ((Auth::user()->jabatan->jabatan == 'Bendahara' || Auth::user()->jabatan->jabatan == 'bendahara') && (is_null($pertemuanCek->iurans) || count($pertemuanCek->iurans) == 0))
                               <a href="{{ route('iuran.create') }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Iuran</a>
                             @elseif((Auth::user()->jabatan->jabatan == 'Sekretaris' || Auth()->user()->jabatan->jabatan == 'sekretaris' || Auth()->user()->jabatan->jabatan == 'Sekertaris' || Auth()->user()->jabatan->jabatan == 'sekertaris') && (is_null($pertemuanCek->notulen)))
                               <a href="{{ route('notulen.create') }}" type="button" class="btn btn-round btn-success btn-sm"><i class="fa fa-plus"></i> Tambah Notulen</a>
@@ -73,7 +73,7 @@
                             <tr>
                               <th scope="row" class="col-md-1">{{ $pertemuans->firstItem() + $key }}</th>
                               <td>{{ $pertemuan->tempat }}</td>
-                              <td>{{ $pertemuan->tanggal }}</td>
+                              <td>{{ date('d F Y', strtotime($pertemuan->tanggal)) }}</td>
                               @if (is_null($pertemuan->total_iuran))
                                 <td> - </td>
                               @else

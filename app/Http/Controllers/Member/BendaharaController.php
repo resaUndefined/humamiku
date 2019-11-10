@@ -24,12 +24,12 @@ class BendaharaController extends Controller
     		$members = User::where('role_id', '!=', 1)
     						->where('is_active', 1)
     		                ->orderBy('name')
-	    				    ->get(['id', 'name']);
+	    				    ->get(['id', 'name', 'kekurangan_iuran']);
 			$jumlahMember = $members->count();
 			if ($jumlahMember > 0) {
 				foreach ($members as $key => $member) {
 					$iurannya = null;
-					$harusnya = 5000;
+					$harusnya = 5000 + (int)$member->kekurangan_iuran;
 					$kekurangan = null;
 					$iuranTmp = Iuran::where('user_id', $member->id)->get(['iuran']);
 					$totalIuranTmp = $iuranTmp->count();
@@ -40,9 +40,19 @@ class BendaharaController extends Controller
 						}
 						$kekurangan = $harusnya - $iurannya;
 					}else{
-						$kekurangan = 5000;
+						$kekurangan = $harusnya;
 					}
-					$member->kekurangannya = $kekurangan;
+					if ($kekurangan < 0) {
+						$member->text = 'masih punya deposite';
+						$member->warna = 'label-success';
+					}elseif($kekurangan > 0){
+						$member->text = 'seharusnya';
+						$member->warna = 'label-warning';
+					}else{
+						$member->text = 'tidak perlu bayar';
+						$member->warna = 'label-info';
+					}
+					$member->kekurangannya = abs($kekurangan);
 				}
 				return view('member.bendahara.create', [
 					'members' => $members,
@@ -165,7 +175,7 @@ class BendaharaController extends Controller
 	    		$member = User::where('role_id', '!=', 1)
     						->where('is_active', 1)
     						->where('id', $pi->user_id)
-	    				    ->first(['name']);
+	    				    ->first(['name', 'kekurangan_iuran']);
 	    		$pi->nama_anggota = $member->name;
 				$iurannya = null;
 				$harusnya = null;
@@ -201,11 +211,21 @@ class BendaharaController extends Controller
 						$harusnya+=5000;
 						$iurannya+=(int)$i_tmp->iuran;
 					}
-					$kekurangan = $harusnya - $iurannya;
+					$kekurangan = $harusnya + (int)$member->kekurangan_iuran - $iurannya;
 				}else{
-					$kekurangan = 5000;
+					$kekurangan = (int)$member->kekurangan_iuran + 5000;
 				}
-				$pi->kekurangannya = $kekurangan;
+				if ($kekurangan < 0) {
+					$pi->text = 'kelebihan';
+					$pi->warna = 'label-success';
+				}elseif($kekurangan > 0){
+					$pi->text = 'kekurangannya';
+					$pi->warna = 'label-danger';
+				}else{
+					$pi->text = 'kekurangannya';
+					$pi->warna = 'label-warning';
+				}
+				$pi->kekurangannya = abs($kekurangan);
 	    	}
 	    	return view('member.bendahara.edit', [
 					'pertemuan' => $pertemuan,
