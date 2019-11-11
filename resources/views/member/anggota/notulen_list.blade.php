@@ -47,7 +47,7 @@
                             <tr>
                               <th scope="row" class="col-md-1">{{ $pertemuans->firstItem() + $key }}</th>
                               <td>{{ $pertemuan->tempat }}</td>
-                              <td>{{ $pertemuan->tanggal }}</td>
+                              <td>{{ date('d F Y', strtotime($pertemuan->tanggal)) }}</td>
                               @if (is_null($pertemuan->total_iuran))
                                 <td> - </td>
                               @else
