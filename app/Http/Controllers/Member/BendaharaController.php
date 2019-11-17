@@ -73,6 +73,9 @@ class BendaharaController extends Controller
     		                ->orderBy('name')
 	    				    ->get(['id']);
 	    	$pertemuan = Pertemuan::where('id', $request->pertemuan)->first();
+	    	if (count($pertemuan->iurans) > 0) {
+	    		return redirect()->route('pertemuan.index')->with('gagal', 'Iuran sudah pernah ditambahkan');
+	    	}
 	    	$totalIuranTmp = null;
 	    	foreach ($members as $key => $member) {
 	    		$iuran = new Iuran();
