@@ -24,6 +24,7 @@ Route::post('/login/custom', 'LoginController@login')->name('login.custom');
 Route::group(['middleware' => ['web', 'auth']], function(){
 	Route::get('logout', 'LoginController@logout')->name('logout.custom');
 });
+
 Route::group(['middleware' => ['web', 'auth', 'isAdmin']], function(){
 	Route::get('/admin', 'Admin\DashboardController@index')->name('admin');
 	Route::prefix('admin')->group(function () {
