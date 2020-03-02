@@ -11,8 +11,12 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return Redirect::to('http://humamiku.000webhostapp.com/');
 });
 
 Auth::routes();
