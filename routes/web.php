@@ -15,6 +15,7 @@
 //     return view('welcome');
 // });
 
+// move domain from heroku to 000webhost
 Route::get('/', function () {
     return Redirect::to('http://humamiku.000webhostapp.com/');
 });
@@ -69,4 +70,9 @@ Route::group(['middleware' => ['web', 'auth', 'isMember']], function(){
 		Route::get('kehadiran-user', 'Member\MemberController@kehadiran')->name('kehadiran.index');
 		Route::get('kehadiran-user/{id}', 'Member\MemberController@kehadiran_show')->name('kehadiran.show');
 	});
+});
+
+// move domain from heroku to 000webhost
+Route::get('/login', function () {
+    return Redirect::to('http://humamiku.000webhostapp.com/login');
 });
