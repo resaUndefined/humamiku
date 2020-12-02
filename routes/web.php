@@ -16,8 +16,11 @@
 // });
 
 // move domain from heroku to 000webhost
+// Route::get('/', function () {
+//     return Redirect::to('http://humamiku.000webhostapp.com/');
+// });
 Route::get('/', function () {
-    return Redirect::to('http://humamiku.000webhostapp.com/');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -73,6 +76,6 @@ Route::group(['middleware' => ['web', 'auth', 'isMember']], function(){
 });
 
 // move domain from heroku to 000webhost
-Route::get('/login', function () {
-    return Redirect::to('http://humamiku.000webhostapp.com/login');
-});
+// Route::get('/login', function () {
+//     return Redirect::to('http://humamiku.000webhostapp.com/login');
+// });
